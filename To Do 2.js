@@ -52,31 +52,60 @@ class SLL{
     }
     removeSelf(value){
         var runner = this.head;
-        while(runner){    
-            if(runner.next == value){
-                runner.next = null;
-                return runner;
+        while(runner){
+            var next = runner.next;      
+            if(next.value == value){
+                runner.next = runner.next.next;
+                break;
             }
             runner = runner.next;
         }
-        
+        return runner;
     }
     display(){
         var runner = this.head;
-        var count = 0
+        var count = 0;
         while(runner){
             count ++;
-            console.log(`This is current Node ${count}, containing value ${runner.value}, next is ${runner.next}`)
-            runner = runner.next
+            console.log(`This is current Node ${count}, containing value ${runner.value}, next is ${runner.next}`);
+            runner = runner.next;
         }
         return this
     }
+    copy(value){
+        var runner = this.head;
+        while(runner){
+            var next = runner.next       
+            if(next.value == value){
+                var new_list = runner.next;
+                break;
+            }
+            runner = runner.next;
+        }
+        return new_list;
+    }
+    // filter(lowVal, highVal){  //work in progress
+    //     var runner = this.head;
+    //     while(runner.next){
+    //         console.log(runner);
+    //         if(runner.value < lowVal || runner.value > highVal){
+    //             console.log("This should be removed: " + runner.value);
+    //             runner = new_SLL.removeSelf(runner);
+    //         } 
+    //     runner = runner.next;   
+    //     }
+    //     return runner;
+    // }
 }
 var new_SLL = new SLL(1);
-new_SLL.add_front(2).add_front(6).add_front(5).add_front(3).add_front(10).add_front(3).add_front(8).add_front(5).add_front(12);
+new_SLL.add_front(2).add_front(6).add_front(5).add_front(4).add_front(10).add_front(3).add_front(8).add_front(5).add_front(12);
 new_SLL.secondToLast();
 console.log(new_SLL.length());
 console.log("This is second to last: " + new_SLL.secondToLast());
-new_SLL.removeSelf(3)
+new_SLL.removeSelf(3);
 console.log("This is after removeSelf(3): ");
 new_SLL.display();
+console.log("This is a copy of given node in list: " + new_SLL.copy(5));
+// new_SLL.filter(5,8);
+// console.log("this is after filter(5,8): ");
+// new_SLL.display();
